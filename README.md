@@ -1,7 +1,9 @@
 Akka gRPC の例
 ---
 
-## asdf
+## 1. 開始
+
+### asdf
 
 Homebrew を使って asdf をインストールします。
 
@@ -9,7 +11,15 @@ Homebrew を使って asdf をインストールします。
 brew install asdf
 ```
 
-## Java
+### grpcurl
+
+Homebrew を使って grpcurl をインストールします。
+
+```shell
+brew install grpcurl
+```
+
+### Java
 
 asdf を使って java をインストールします。
 
@@ -24,7 +34,7 @@ asdf install java temurin-17.0.5+8
 asdf global java temurin-17.0.5+8
 ```
 
-## sbt
+### sbt
 
 asdf を使って sbt をインストールします。
 
@@ -39,7 +49,7 @@ asdf install sbt 1.8.2
 asdf global sbt 1.8.2
 ```
 
-## プロジェクトの生成
+### プロジェクトの生成
 
 sbt を使ってプロジェクトを生成します。
 
@@ -57,4 +67,51 @@ name [Scala Seed Project]: hello-akka-grpc
 
 ```shell
 cd hello-akka-grpc
+```
+
+## 2. akka-grpc
+
+- [Introduction to Akka gRPC](https://youtu.be/kXN30ttsf-I)
+- [Walkthrough](https://doc.akka.io/docs/akka-grpc/current/server/walkthrough.html)
+- [Overview of Akka libraries and modules](https://doc.akka.io/docs/akka/2.7.0/typed/guide/modules.html)
+
+`Main.scala` を IDE 等で実行します。
+
+ターミナルから次のコマンドを実行してください。
+
+```shell
+grpcurl -plaintext localhost:8080 list
+```
+
+次のレスポンスが返ります。
+
+```text
+com.pigumer.HelloService
+grpc.reflection.v1alpha.ServerReflection
+```
+
+ターミナルから次のコマンドを実行してください。
+
+```shell
+grpcurl -plaintext localhost:8080 list com.pigumer.HelloService
+```
+
+次のレスポンスが返ります。
+
+```text
+com.pigumer.HelloService.Hello
+```
+
+HelloService を実行します。
+
+```shell
+grpcurl -plaintext -d '{"name":"Foo"}' localhost:8080 com.pigumer.HelloService.Hello
+```
+
+次のレスポンスが返ります。
+
+```json
+{
+  "value": "Hello Foo"
+}
 ```

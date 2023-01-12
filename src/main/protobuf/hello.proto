@@ -1,0 +1,14 @@
+syntax = "proto3";
+package com.pigumer;
+
+service HelloService {
+  rpc Hello (HelloRequest) returns (HelloResult) {}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResult {
+  string value = 1;
+}
