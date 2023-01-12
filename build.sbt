@@ -1,14 +1,20 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.12.8"
+enablePlugins(AkkaGrpcPlugin)
+
+ThisBuild / scalaVersion     := "2.13.10"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
+ThisBuild / organization     := "com.pigumer"
+ThisBuild / organizationName := "pigumer"
 
 lazy val root = (project in file("."))
   .settings(
     name := "hello-akka-grpc",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies ++= Seq(
+      scalaTest % Test,
+      akkaActorTyped,
+      logbackClassic
+    )
   )
 
 // Uncomment the following for publishing to Sonatype.
